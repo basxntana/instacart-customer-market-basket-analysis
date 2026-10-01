@@ -1,0 +1,12 @@
+# Virtual environment
+.venv/
+__pycache__/
+*.pyc
+
+# Source + derived data — 1.1 GB, four files exceed GitHub's 100 MB limit.
+# README explains how to obtain the CSVs and where to place them.
+archive/
+data/
+
+# OS
+.DS_Store

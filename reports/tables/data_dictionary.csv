@@ -1,0 +1,24 @@
+table,column,dtype,key_role,meaning
+aisles,aisle_id,int64,PK,Surrogate id for a shelf/aisle (1–134).
+aisles,aisle,object,,"Aisle name, e.g. 'fresh fruits'. Includes the placeholder values 'missing' and 'other'."
+departments,department_id,int64,PK,Surrogate id for a department (1–21).
+departments,department,object,,"Department name, e.g. 'produce'. Includes the placeholder value 'missing'."
+products,product_id,int64,PK,"Surrogate id for a product/SKU (1–49,688)."
+products,product_name,object,,Free-text product name. Not unique: 99 names are shared by more than one product_id.
+products,aisle_id,int64,FK → aisles,The one aisle this product sits in.
+products,department_id,int64,FK → departments,"The one department this product sits in. Note products carries BOTH FKs, so aisle→department is denormalised."
+orders,order_id,int64,PK,Surrogate id for one order/basket.
+orders,user_id,int64,FK (implicit),The customer. There is no users table; this is the only customer identifier in the dataset.
+orders,eval_set,object,,"Which file holds this order's contents: 'prior' (history), 'train' (the customer's most recent order, contents known), 'test' (most recent order, contents NOT released)."
+orders,order_number,int64,,"Sequence position of this order for this customer, 1 = their first ever. Caps at 100."
+orders,order_dow,int64,,"Day of week, 0–6. The release does NOT document which day is 0."
+orders,order_hour_of_day,int64,,"Hour the order was placed, 0–23. Local time, no date is given."
+orders,days_since_prior_order,float64,,Days since this customer's previous order. NULL on a first order (no previous order exists). Capped at 30.
+order_products__prior,order_id,int64,PK part / FK → orders,The order this line belongs to.
+order_products__prior,product_id,int64,PK part / FK → products,"The product on this line. (order_id, product_id) is the composite PK."
+order_products__prior,add_to_cart_order,int64,,"Position in which the customer added this item to the cart, 1 = first. 1–145."
+order_products__prior,reordered,int64,,"1 if this customer has bought this product in an earlier order, else 0. This is the dataset's own definition of a reorder."
+order_products__train,order_id,int64,PK part / FK → orders,"Same schema as prior; holds only the single most recent order of 131,209 customers."
+order_products__train,product_id,int64,PK part / FK → products,As above.
+order_products__train,add_to_cart_order,int64,,As above.
+order_products__train,reordered,int64,,As above.

@@ -1,0 +1,9 @@
+#,finding,severity,decision
+1,"days_since_prior_order nulls (206,209)",not a defect,keep + flag is_first_order; no imputation
+2,99 duplicate product names (80 same-aisle),medium,add product_uid; keep product_id
+3,dspo capped at 30 (10.8%); order_number capped at 100,medium,flag; report interval both ways
+4,"'missing'/'other' placeholder categories (1,258 products)",medium,flag is_placeholder; exclude from rankings
+5,all behavioural distributions right-skewed,design constraint,median + spread; log before clustering
+6,order_dow mapping undocumented,low,label with stated assumption
+7,"75,000 test orders have no contents",structural,order-level only
+8,no orphan FKs / duplicate rows / invalid codes,clean,join-integrity baseline

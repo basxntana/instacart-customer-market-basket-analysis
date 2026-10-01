@@ -1,0 +1,15 @@
+kpi,value,definition
+Total customers,206209.0,distinct user_id in orders
+Total orders (all),3421083.0,"every order row, incl. 75,000 test orders with no contents"
+Total orders (with basket contents),3346083.0,prior + train; the base for all item-level analysis
+Total items purchased,33819106.0,basket lines = product x order
+Products in catalogue,49688.0,products.csv rows
+Products ever purchased,49573.0,distinct analytical products with >=1 purchase
+Average basket size,10.10707325550502,items per order
+Median basket size,8.0,items per order
+Average orders per customer,16.590367054784224,all orders / customers
+Median orders per customer,10.0,per-customer order count
+Reorder rate (all items),59.00617242809434,% of basket lines flagged as a reorder
+Reorder rate (excl. first orders),62.869273525333355,first orders cannot contain reorders by definition
+Average days between orders,11.114835739135742,"raw, incl. the 30-day cap"
+Average days between orders (excl. 30-day cap),8.663738250732422,excludes right-censored values
